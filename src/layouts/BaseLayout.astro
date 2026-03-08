@@ -6,6 +6,7 @@ import "../styles/ticker.css";
 import ParticleCanvas from "../components/ParticleCanvas.astro";
 import TopBar from "../components/TopBar.astro";
 import { ViewTransitions } from "astro:transitions";
+import ScrollToTop from "../components/ScrollToTop.astro";
 
 interface Props {
   title: string;
@@ -93,6 +94,54 @@ const { title } = Astro.props;
         }, 50);
       });
     </script>
+
+    <style is:global>
+      /* ==========================================================
+         CRÍTICO: MUTACIÓN ESTRUCTURAL DE EJES (VIEWPORT <= 1024px)
+         ========================================================== */
+      @media screen and (max-width: 1024px) {
+        /* Colapso del contenedor principal a vector unidimensional vertical */
+        .app-layout {
+          display: flex !important;
+          flex-direction: column !important;
+          min-height: 100vh !important;
+          overflow-x: hidden !important;
+        }
+
+        /* Liberación geométrica del panel lateral (Sidebar) */
+        .panel-left {
+          position: relative !important;
+          width: 100% !important;
+          height: auto !important;
+          min-height: auto !important;
+          max-height: none !important;
+          border-right: none !important;
+          border-bottom: 1px solid rgba(224, 197, 143, 0.2) !important;
+          overflow-y: visible !important;
+          padding: 3rem 1.5rem 2rem 1.5rem !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: center !important;
+          text-align: center !important;
+          z-index: 10 !important;
+        }
+
+        /* Ajuste de márgenes del panel de contenido principal */
+        .panel-right {
+          width: 100% !important;
+          margin-left: 0 !important;
+          padding: 2rem 1.5rem !important;
+          overflow-y: visible !important;
+        }
+
+        /* Forzado de alineación central para los elementos hijos del panel izquierdo */
+        .panel-left > * {
+          align-items: center !important;
+          text-align: center !important;
+          width: 100% !important;
+        }
+      }
+    </style>
+    <ScrollToTop />
   </body>
 </html>
-

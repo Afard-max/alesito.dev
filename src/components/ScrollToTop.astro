@@ -1,0 +1,106 @@
+---
+interface Props {
+  threshold?: number;
+  color?: string;
+  bottom?: string;
+  right?: string;
+}
+
+const {
+  threshold = 400,
+  color = "#E0C58F" /* Sincronizado por defecto con su --color-gold */,
+  bottom = "36px",
+  right = "36px",
+} = Astro.props;
+---
+
+<button
+  id="scroll-to-top"
+  aria-label="Volver al inicio"
+  title="Volver al inicio"
+  style={`--btn-color: ${color}; bottom: ${bottom}; right: ${right};`}
+>
+  ↑
+</button>
+
+<style>
+  #scroll-to-top {
+    position: fixed;
+    bottom: var(--btn-bottom, 36px);
+    right: var(--btn-right, 36px);
+    z-index: 10000;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: var(--btn-color, #f59e0b);
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(16px) scale(0.8);
+    pointer-events: none;
+    box-shadow: none;
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease,
+      box-shadow 0.25s ease,
+      background 0.25s ease;
+  }
+
+  #scroll-to-top.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+    box-shadow:
+      0 4px 24px color-mix(in srgb, var(--btn-color) 35%, transparent),
+      0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  #scroll-to-top:hover {
+    transform: translateY(-3px) scale(1.1);
+    background: color-mix(in srgb, var(--btn-color) 85%, white);
+    box-shadow:
+      0 8px 32px color-mix(in srgb, var(--btn-color) 50%, transparent),
+      0 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  #scroll-to-top:active {
+    transform: scale(0.95);
+  }
+</style>
+
+<script define:vars={{ threshold }}>
+  document.addEventListener("astro:page-load", () => {
+    const btn = document.getElementById("scroll-to-top");
+    if (!btn) return;
+
+    // Funciones encapsuladas para evitar fugas de memoria y duplicaciones
+    const handleScroll = () => {
+      if (window.scrollY > threshold) {
+        btn.classList.add("visible");
+      } else {
+        btn.classList.remove("visible");
+      }
+    };
+
+    const handleClick = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    // Purga de eventos previos (CRÍTICO para ViewTransitions)
+    window.removeEventListener("scroll", handleScroll);
+    btn.removeEventListener("click", handleClick);
+
+    // Inicialización
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    btn.addEventListener("click", handleClick);
+
+    // Verificación de estado inicial
+    handleScroll();
+  });
+</script>
