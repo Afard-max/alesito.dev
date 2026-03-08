@@ -27,7 +27,7 @@ body::before {
     );
 }
 
-/* 2. Gradiente de luz reactivo al cursor [cite: 214] */
+/* 2. Gradiente de luz reactivo al cursor  */
 body::after {
   content: "";
   position: fixed;
@@ -39,9 +39,9 @@ body::after {
   pointer-events: none; /* CRÍTICO: Evita que el gradiente bloquee los clics del usuario */
   background: radial-gradient(
     600px circle at var(--mouse-x) var(--mouse-y),
-    rgba(224, 197, 143, 0.15), /* Utiliza el valor HEX de --color-gold con 15% de opacidad [cite: 214] */
+    rgba(224, 197, 143, 0.15), /* Utiliza el valor HEX de --color-gold con 15% de opacidad  */
     transparent 80%
   );
-  mix-blend-mode: screen; /* Fusión lumínica sin opacar la rejilla [cite: 215] */
+  mix-blend-mode: screen; /* Fusión lumínica sin opacar la rejilla  */
   transition: background 0.1s ease; /* Suavizado micro-estético en caso de salto del puntero */
 }

@@ -11,12 +11,12 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 0; /* CRÍTICO: Debe estar por debajo del contenido F-03 */ [cite: 81]
+    z-index: 0; /* CRÍTICO: Debe estar por debajo del contenido F-03 */ 
     pointer-events: none; /* Previene intercepción de clics */
   }
 
   /* Desactiva el canvas si el usuario prefiere movimiento reducido  */
-  @media (prefers-reduced-motion: reduce) { [cite: 270]
+  @media (prefers-reduced-motion: reduce) { 
     #particle-canvas {
       display: none;
     }
@@ -43,13 +43,13 @@
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
-    // Redimensionamiento reactivo [cite: 226]
+    // Redimensionamiento reactivo 
     window.addEventListener("resize", () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     });
 
-    const MAX_PARTICLES = 60; // Límite estricto de rendimiento [cite: 219]
+    const MAX_PARTICLES = 60; // Límite estricto de rendimiento 
     const PARTICLES: Particle[] = [];
 
     class Particle {
@@ -69,9 +69,9 @@
       }
 
       reset() {
-        this.radius = Math.random() * 1.5 + 1.5; // Radio entre 1.5 y 3px [cite: 225]
+        this.radius = Math.random() * 1.5 + 1.5; // Radio entre 1.5 y 3px 
         this.alpha = 0; // Inicia invisible para el fade-in
-        this.maxAlpha = Math.random() * 0.3 + 0.1; // Alpha máximo [cite: 225]
+        this.maxAlpha = Math.random() * 0.3 + 0.1; // Alpha máximo 
 
         const edge = Math.floor(Math.random() * 4); // 0: Top, 1: Right, 2: Bottom, 3: Left
         const baseSpeed = Math.random() * 0.4 + 0.1;
@@ -117,7 +117,7 @@
           this.alpha = Math.min(this.maxAlpha, this.alpha + 0.005);
         }
 
-        // Reciclaje de la partícula si sale completamente de la pantalla [cite: 224]
+        // Reciclaje de la partícula si sale completamente de la pantalla 
         if (
           this.x < -20 ||
           this.x > width + 20 ||
@@ -132,7 +132,7 @@
         if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        // Color gold de la paleta [cite: 225]
+        // Color gold de la paleta 
         ctx.fillStyle = `rgba(224, 197, 143, ${this.alpha})`;
         ctx.fill();
       }

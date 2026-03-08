@@ -1,7 +1,7 @@
 /* src/styles/ticker.css */
 
 :root {
-  --ticker-duration: 40s; /* Parámetro algorítmico de velocidad [cite: 240] */
+  --ticker-duration: 40s; /* Parámetro algorítmico de velocidad  */
 }
 
 .ticker-wrapper {
@@ -21,7 +21,7 @@
 }
 
 .ticker-wrapper:hover .ticker-track {
-  animation-play-state: paused; /* Accesibilidad cognitiva [cite: 241] */
+  animation-play-state: paused; /* Accesibilidad cognitiva  */
 }
 
 @keyframes scroll-ticker {

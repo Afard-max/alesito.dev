@@ -12,7 +12,7 @@
 }
 
 html {
-  scroll-behavior: smooth; /* Requisito estricto del SDD para la navegación [cite: 247] */
+  scroll-behavior: smooth; /* Requisito estricto del SDD para la navegación  */
 }
 
 *, *::before, *::after {
