@@ -1,5 +1,26 @@
 ---
-// Redirección estricta al idioma base en tiempo de servidor
-return Astro.redirect("/es");
+// src/pages/index.astro
+// Redirección silenciosa con camuflaje de renderizado
 ---
 
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redirigiendo...</title>
+    <meta http-equiv="refresh" content="0;url=/es" />
+    <script>
+      window.location.replace("/es");
+    </script>
+    <style>
+      /* CRÍTICO: Sincronización exacta con var(--color-navy) para evitar destellos */
+      body {
+        background-color: #112250;
+        color: #112250; /* Oculta cualquier texto residual fundiéndolo con el fondo */
+        margin: 0;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body> </body>
+</html>
