@@ -1,0 +1,166 @@
+---
+// src/components/TechTicker.astro
+---
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+/>
+
+<div class="ticker-container">
+  <div class="ticker-track">
+    <!-- Grupo original -->
+    <span class="ticker-item"
+      ><i class="devicon-python-plain colored"></i><span class="ticker-label"
+        >Python</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-javascript-plain colored"></i><span
+        class="ticker-label">JavaScript</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-typescript-plain colored"></i><span
+        class="ticker-label">TypeScript</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-astro-plain colored"></i><span class="ticker-label"
+        >Astro</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-nodejs-plain colored"></i><span class="ticker-label"
+        >Node.js</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-react-original colored"></i><span class="ticker-label"
+        >React</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-git-plain colored"></i><span class="ticker-label"
+        >Git</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-linux-plain"></i><span class="ticker-label">Linux</span
+      ></span
+    >
+    <!-- Copia exacta para loop seamless -->
+    <span class="ticker-item"
+      ><i class="devicon-python-plain colored"></i><span class="ticker-label"
+        >Python</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-javascript-plain colored"></i><span
+        class="ticker-label">JavaScript</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-typescript-plain colored"></i><span
+        class="ticker-label">TypeScript</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-astro-plain colored"></i><span class="ticker-label"
+        >Astro</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-nodejs-plain colored"></i><span class="ticker-label"
+        >Node.js</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-react-original colored"></i><span class="ticker-label"
+        >React</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-git-plain colored"></i><span class="ticker-label"
+        >Git</span
+      ></span
+    >
+    <span class="ticker-item"
+      ><i class="devicon-linux-plain"></i><span class="ticker-label">Linux</span
+      ></span
+    >
+  </div>
+</div>
+
+<style>
+  .ticker-container {
+    width: 100%;
+    overflow: hidden;
+    /* Máscara de fundido en los bordes izquierdo y derecho */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 15%,
+      black 85%,
+      transparent 100%
+    );
+  }
+
+  @keyframes ticker-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .ticker-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: ticker-scroll 18s linear infinite;
+  }
+
+  .ticker-track:hover {
+    animation-play-state: paused;
+  }
+
+  .ticker-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    flex-shrink: 0;
+    padding-right: 2rem;
+  }
+
+  .ticker-item i {
+    font-size: 1.6rem;
+    /* Normaliza el color de íconos que no tienen variante colored */
+    /*color: var(--color-muted);*/
+    transition:
+      transform 200ms ease,
+      color 200ms ease;
+  }
+
+  .ticker-item:hover i {
+    transform: translateY(-3px);
+  }
+
+  .ticker-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.6rem;
+    color: var(--color-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+</style>

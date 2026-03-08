@@ -1,0 +1,53 @@
+/* src/styles/ticker.css */
+
+:root {
+  --ticker-duration: 40s; /* Parámetro algorítmico de velocidad [cite: 240] */
+}
+
+.ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.ticker-track {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  /* La animación traslada el contenedor un 50% de su ancho total (que contiene 2 sets idénticos)  */
+  animation: scroll-ticker var(--ticker-duration) linear infinite;
+}
+
+.ticker-wrapper:hover .ticker-track {
+  animation-play-state: paused; /* Accesibilidad cognitiva [cite: 241] */
+}
+
+@keyframes scroll-ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Condicional de accesibilidad rectificado */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+    transform: none;
+    /* Se elimina flex-wrap: wrap para forzar la unidimensionalidad */
+  }
+  
+  .ticker-wrapper {
+    /* Mantenemos mask-image intacto para preservar el difuminado lateral */
+    overflow-x: auto; /* Permite desplazamiento manual del usuario */
+    scrollbar-width: none; /* Oculta la barra en Firefox */
+  }
+
+  .ticker-wrapper::-webkit-scrollbar {
+    display: none; /* Oculta la barra en WebKit (Chrome/Edge/Safari) */
+  }
+}

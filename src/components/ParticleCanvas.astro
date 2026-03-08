@@ -1,0 +1,161 @@
+---
+// src/components/ParticleCanvas.astro
+---
+
+<canvas id="particle-canvas" aria-hidden="true" transition:persist="particles"></canvas>
+
+<style>
+  #particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0; /* CRÍTICO: Debe estar por debajo del contenido F-03 */ [cite: 81]
+    pointer-events: none; /* Previene intercepción de clics */
+  }
+
+  /* Desactiva el canvas si el usuario prefiere movimiento reducido  */
+  @media (prefers-reduced-motion: reduce) { [cite: 270]
+    #particle-canvas {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // IIFE para aislar el scope sin depender de eventos de ciclo de vida del DOM obsoletos en módulos
+  (() => {
+    // 1. Detección de preferencia de movimiento reducido
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (prefersReducedMotion) return;
+
+    const canvas = document.getElementById(
+      "particle-canvas",
+    ) as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    // Redimensionamiento reactivo [cite: 226]
+    window.addEventListener("resize", () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    const MAX_PARTICLES = 60; // Límite estricto de rendimiento [cite: 219]
+    const PARTICLES: Particle[] = [];
+
+    class Particle {
+      x!: number;
+      y!: number;
+      vx!: number;
+      vy!: number;
+      radius!: number;
+      alpha!: number;
+      maxAlpha!: number;
+
+      constructor() {
+        this.reset();
+        // Distribuir partículas inicialmente para no tener un "estallido" al cargar
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+      }
+
+      reset() {
+        this.radius = Math.random() * 1.5 + 1.5; // Radio entre 1.5 y 3px [cite: 225]
+        this.alpha = 0; // Inicia invisible para el fade-in
+        this.maxAlpha = Math.random() * 0.3 + 0.1; // Alpha máximo [cite: 225]
+
+        const edge = Math.floor(Math.random() * 4); // 0: Top, 1: Right, 2: Bottom, 3: Left
+        const baseSpeed = Math.random() * 0.4 + 0.1;
+
+        if (edge === 0) {
+          this.x = Math.random() * width;
+          this.y = -10;
+          this.vx = (Math.random() - 0.5) * 0.5;
+          this.vy = baseSpeed;
+        } else if (edge === 1) {
+          this.x = width + 10;
+          this.y = Math.random() * height;
+          this.vx = -baseSpeed;
+          this.vy = (Math.random() - 0.5) * 0.5;
+        } else if (edge === 2) {
+          this.x = Math.random() * width;
+          this.y = height + 10;
+          this.vx = (Math.random() - 0.5) * 0.5;
+          this.vy = -baseSpeed;
+        } else {
+          this.x = -10;
+          this.y = Math.random() * height;
+          this.vx = baseSpeed;
+          this.vy = (Math.random() - 0.5) * 0.5;
+        }
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Lógica de fade-in y fade-out basada en la proximidad a los bordes
+        const edgeDistance = Math.min(
+          this.x,
+          width - this.x,
+          this.y,
+          height - this.y,
+        );
+
+        if (edgeDistance < 50) {
+          this.alpha = Math.max(0, this.alpha - 0.01);
+        } else if (this.alpha < this.maxAlpha) {
+          this.alpha = Math.min(this.maxAlpha, this.alpha + 0.005);
+        }
+
+        // Reciclaje de la partícula si sale completamente de la pantalla [cite: 224]
+        if (
+          this.x < -20 ||
+          this.x > width + 20 ||
+          this.y < -20 ||
+          this.y > height + 20
+        ) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        // Color gold de la paleta [cite: 225]
+        ctx.fillStyle = `rgba(224, 197, 143, ${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    // Inicialización del pool
+    for (let i = 0; i < MAX_PARTICLES; i++) {
+      PARTICLES.push(new Particle());
+    }
+
+    // Loop de renderizado
+    function animate() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+
+      for (const p of PARTICLES) {
+        p.update();
+        p.draw();
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  })();
+</script>

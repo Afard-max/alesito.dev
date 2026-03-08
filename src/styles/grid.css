@@ -1,0 +1,47 @@
+/* src/styles/grid.css */
+
+/* 1. Rejilla de fondo fija (40x40px)  */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -2; /* Capa más profunda */
+  background-color: var(--color-navy);
+  background-image: 
+    repeating-linear-gradient(
+      to right,
+      rgba(60, 80, 125, 0.2) 0px,
+      rgba(60, 80, 125, 0.2) 1px,
+      transparent 1px,
+      transparent 40px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(60, 80, 125, 0.2) 0px,
+      rgba(60, 80, 125, 0.2) 1px,
+      transparent 1px,
+      transparent 40px
+    );
+}
+
+/* 2. Gradiente de luz reactivo al cursor [cite: 214] */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1; /* Sobre la rejilla, debajo del contenido */
+  pointer-events: none; /* CRÍTICO: Evita que el gradiente bloquee los clics del usuario */
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(224, 197, 143, 0.15), /* Utiliza el valor HEX de --color-gold con 15% de opacidad [cite: 214] */
+    transparent 80%
+  );
+  mix-blend-mode: screen; /* Fusión lumínica sin opacar la rejilla [cite: 215] */
+  transition: background 0.1s ease; /* Suavizado micro-estético en caso de salto del puntero */
+}

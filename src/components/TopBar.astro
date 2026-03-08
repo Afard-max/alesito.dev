@@ -1,0 +1,50 @@
+---
+// src/components/TopBar.astro
+import LanguageSwitcher from "./LanguageSwitcher.astro";
+---
+
+<header class="top-bar" aria-label="Barra superior">
+  <div class="top-bar-content">
+    <LanguageSwitcher />
+  </div>
+</header>
+
+<style>
+  .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 140px; /* Área expandida para acomodar la transición del gradiente */
+
+    /* El fondo pasa de tu color #0F172A sólido a transparente */
+    background: linear-gradient(
+      to bottom,
+      rgba(15, 23, 42, 0.95) 30%,
+      rgba(15, 23, 42, 0) 100%
+    );
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* CRÍTICO: Máscara para que el filtro blur también se difumine y no deje una línea de corte dura */
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+
+    z-index: 50;
+    display: flex;
+    align-items: flex-start; /* Alinea el contenido arriba */
+    justify-content: flex-end;
+    padding: 2rem 4rem 0 4rem; /* Padding superior para anclar el switch */
+
+    /* CRÍTICO: Previene que la caja invisible del gradiente bloquee clics en el panel derecho */
+    pointer-events: none;
+  }
+
+  .top-bar-content {
+    display: flex;
+    align-items: center;
+    /* Reactiva la interactividad exclusivamente para el contenedor del switch */
+    pointer-events: auto;
+  }
+</style>

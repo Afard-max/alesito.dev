@@ -1,0 +1,150 @@
+---
+// src/components/SocialLinks.astro
+import { socialLinks } from "../data/social";
+---
+
+<ul class="social-row" aria-label="Enlaces a redes sociales">
+  {
+    socialLinks.map((link) => (
+      <li>
+        <a
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={link.label}
+          class="social-btn"
+          data-social={link.icon}
+        >
+          {link.icon === "linkedin" && (
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M12.5 100H29.2V33.3H12.5V100ZM20.8 25C15.3 25 11 20.6 11 15C11 9.4 15.4 5 20.8 5C26.3 5 30.6 9.4 30.6 15C30.6 20.6 26.3 25 20.8 25ZM89 100H72.4V67.4C72.4 60.9 72.2 52.5 63.3 52.5C54.2 52.5 52.8 59.6 52.8 66.9V100H36.2V33.3H52.2V41H52.4C54.7 36.7 60.2 32.1 68.5 32.1C85.4 32.1 89 43.1 89 57.5V100Z" />
+            </svg>
+          )}
+          {link.icon === "github" && (
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50 4C24.5 4 4 24.5 4 50C4 70.4 17.3 87.6 35.7 93.6C38 94 38.9 92.6 38.9 91.4V83.2C26.2 85.9 23.6 77.5 23.6 77.5C21.5 72.3 18.5 70.9 18.5 70.9C14.3 68.1 18.8 68.2 18.8 68.2C23.4 68.5 25.8 72.9 25.8 72.9C29.9 79.8 36.5 77.8 39.1 76.6C39.5 73.7 40.7 71.7 42 70.6C31.9 69.5 21.2 65.6 21.2 48C21.2 43 23 38.9 26 35.7C25.5 34.6 23.9 29.9 26.5 23.5C26.5 23.5 30.4 22.3 38.9 28.3C42.6 27.3 46.3 26.8 50 26.8C53.7 26.8 57.4 27.3 61.1 28.3C69.6 22.3 73.5 23.5 73.5 23.5C76.1 29.9 74.5 34.6 74 35.7C77 38.9 78.8 43 78.8 48C78.8 65.7 68.1 69.5 57.9 70.6C59.6 72 61.1 74.7 61.1 78.9V91.4C61.1 92.7 62 94.1 64.3 93.6C82.7 87.6 96 70.4 96 50C96 24.5 75.5 4 50 4Z" />
+            </svg>
+          )}
+          {link.icon === "gitlab" && (
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M97.5 57.1L88.8 30.3L71.4 6L50 94L28.6 6L11.2 30.3L2.5 57.1C1.7 59.7 2.7 62.5 5 64L50 96L95 64C97.3 62.5 98.3 59.7 97.5 57.1Z" />
+              <path opacity="0.6" d="M50 94L71.4 6L88.8 30.3L50 94Z" />
+              <path opacity="0.6" d="M50 94L28.6 6L11.2 30.3L50 94Z" />
+            </svg>
+          )}
+          {link.icon === "vsco" && (
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M50 6a44 44 0 1 0 0 88 44 44 0 0 0 0-88zm0 6a38 38 0 1 1 0 76 38 38 0 0 1 0-76z" />
+              <circle
+                cx="50"
+                cy="50"
+                r="30"
+                stroke="currentColor"
+                stroke-width="4"
+                fill="none"
+              />
+              <circle cx="50" cy="50" r="8" fill="currentColor" />
+              <g stroke="currentColor" stroke-width="4" stroke-linecap="round">
+                <line x1="50" y1="12" x2="50" y2="20" />
+                <line x1="50" y1="80" x2="50" y2="88" />
+                <line x1="12" y1="50" x2="20" y2="50" />
+                <line x1="80" y1="50" x2="88" y2="50" />
+                <line x1="23.2" y1="23.2" x2="28.8" y2="28.8" />
+                <line x1="71.2" y1="71.2" x2="76.8" y2="76.8" />
+                <line x1="76.8" y1="23.2" x2="71.2" y2="28.8" />
+                <line x1="28.8" y1="71.2" x2="23.2" y2="76.8" />
+              </g>
+            </svg>
+          )}
+          {link.icon === "x" && (
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M57.9 43.8L89.3 8H82L54.7 39.3L33.1 8H8L40.9 56.5L8 94H15.3L43.9 61.1L66.9 94H92L57.9 43.8ZM47.5 57.1L44.4 52.7L17.9 13.2H29.7L50.2 41.5L53.4 45.9L82.1 87.1H70.3L47.5 57.1Z" />
+            </svg>
+          )}
+          {link.icon === "youtube" && (
+            <svg viewBox="0 0 100 100" fill="currentColor">
+              <path d="M95.7 27.3C94.6 23.1 91.4 19.8 87.3 18.7C79.8 16.7 50 16.7 50 16.7C50 16.7 20.2 16.7 12.7 18.7C8.6 19.8 5.4 23.1 4.3 27.3C2.3 34.9 2.3 50.6 2.3 50.6C2.3 50.6 2.3 66.3 4.3 73.9C5.4 78.1 8.6 81.4 12.7 82.5C20.2 84.5 50 84.5 50 84.5C50 84.5 79.8 84.5 87.3 82.5C91.4 81.4 94.6 78.1 95.7 73.9C97.7 66.3 97.7 50.6 97.7 50.6C97.7 50.6 97.7 34.9 95.7 27.3ZM40.9 63.7V37.5L65.5 50.6L40.9 63.7Z" />
+            </svg>
+          )}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .social-row {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* Alineación secundaria central */
+    align-items: center;
+    gap: 1.2rem;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  /* Área escalada a 60x60px */
+  .social-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background-color: rgba(60, 80, 125, 0.1);
+    border: 1px solid var(--color-blue);
+    color: var(--color-muted);
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Vector escalado a 30x30px */
+  .social-btn svg {
+    width: 30px;
+    height: 30px;
+    pointer-events: none;
+  }
+
+  /* ── HOVER EFFECTS Y COLORES ESTRICTOS ── */
+  .social-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+  }
+
+  .social-btn[data-social="linkedin"]:hover {
+    color: #ffffff;
+    background-color: #0077b5;
+    border-color: #0077b5;
+    box-shadow: 0 4px 12px rgba(0, 119, 181, 0.3);
+  }
+  .social-btn[data-social="github"]:hover {
+    color: #ffffff;
+    background-color: #24292e;
+    border-color: #24292e;
+    box-shadow: 0 4px 12px rgba(36, 41, 46, 0.3);
+  }
+  .social-btn[data-social="gitlab"]:hover {
+    color: #ffffff;
+    background-color: #fc6d26;
+    border-color: #fc6d26;
+    box-shadow: 0 4px 12px rgba(252, 109, 38, 0.3);
+  }
+  .social-btn[data-social="vsco"]:hover {
+    color: #ffffff;
+    background-color: #111111;
+    border-color: #111111;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  .social-btn[data-social="x"]:hover {
+    color: #ffffff;
+    background-color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  }
+  .social-btn[data-social="youtube"]:hover {
+    color: #ffffff;
+    background-color: #ff0000;
+    border-color: #ff0000;
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+  }
+</style>

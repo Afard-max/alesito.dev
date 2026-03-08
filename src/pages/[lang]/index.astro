@@ -1,0 +1,729 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import { useTranslations } from "../../i18n/utils";
+import YoutubeCard from "../../components/YoutubeCard.astro";
+
+export function getStaticPaths() {
+  return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
+}
+
+const { lang } = Astro.params;
+// Instanciamos el helper de traducción para el idioma actual
+const t = useTranslations(lang as "es" | "en");
+---
+
+<BaseLayout title="alesito.dev | Portfolio Personal">
+  <div slot="left-panel" style="height: 100%;">
+    <Sidebar />
+  </div>
+
+  <div slot="right-panel" class="content-container">
+    <section id="acerca-de" class="section-animate">
+      <h2>{t("section.about")}</h2>
+
+      {
+        lang === "es" ? (
+          <div class="prose">
+            <p>
+              Estudiante en formación concurrente del Profesorado en Matemáticas
+              y la carrera de Analista Programador Web. Mi metodología operativa
+              se fundamenta en la aplicación del rigor lógico y el análisis
+              estructurado para la resolución de problemas complejos.
+            </p>
+            <p>
+              Actualmente profundizo mis conocimientos teóricos y prácticos en
+              Cálculo, Química, programación en <strong>Python</strong> y la
+              adquisición estructurada del idioma japonés.
+            </p>
+            <p>
+              Mi área de interés investigativo abarca también la psicología
+              cognitiva, la macroeconomía y el desarrollo de software
+              interactivo utilizando motores de renderizado como Ren'Py.
+            </p>
+          </div>
+        ) : (
+          <div class="prose">
+            <p>
+              Concurrent student in the Mathematics Education program and the
+              Web Programmer Analyst degree. My operational methodology is based
+              on the application of logical rigor and structured analysis for
+              complex problem-solving.
+            </p>
+            <p>
+              I am currently advancing my theoretical and practical foundation
+              in Calculus, Chemistry, <strong>Python</strong> programming, and
+              structured Japanese language acquisition.
+            </p>
+            <p>
+              My areas of investigative interest also encompass cognitive
+              psychology, macroeconomics, and interactive software development
+              using rendering engines like Ren'Py.
+            </p>
+          </div>
+        )
+      }
+    </section>
+
+    <section id="experiencia" class="section-animate">
+      <h2>{t("section.experience")}</h2>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">
+            {lang === "es" ? "Presente" : "Present"}
+          </div>
+          <div class="timeline-content">
+            <h3>
+              {
+                lang === "es"
+                  ? "Contratista Independiente"
+                  : "Independent Contractor"
+              }
+            </h3>
+            <p class="timeline-tech">Desarrollo · Lógica Algorítmica</p>
+            <p>
+              {
+                lang === "es"
+                  ? "Ejecución de contrato laboral a término (4 meses) aplicando fundamentos analíticos para la optimización de procesos."
+                  : "Execution of a fixed-term employment contract (4 months) applying analytical fundamentals for process optimization."
+              }
+            </p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">2026</div>
+          <div class="timeline-content">
+            <h3>
+              {
+                lang === "es"
+                  ? "Desarrollador Open Source"
+                  : "Open Source Developer"
+              }
+            </h3>
+            <p class="timeline-tech">Python · TypeScript · Astro · React</p>
+            <p>
+              {
+                lang === "es"
+                  ? "Ingeniería, desarrollo y mantenimiento de múltiples soluciones de código abierto. La arquitectura de los proyectos abarca desde sistemas de análisis de datos (APIs REST) y procesamiento asíncrono de flujos multimedia, hasta plataformas interactivas para el aprendizaje técnico y sistemas algorítmicos de retención espaciada (SRS)."
+                  : "Engineering, development, and maintenance of multiple open-source solutions. The project architecture ranges from data analysis systems (REST APIs) and asynchronous multimedia stream processing, to interactive platforms for technical learning and algorithmic spaced repetition systems (SRS)."
+              }
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="proyectos" class="section-animate">
+      <h2>{t("section.projects")}</h2>
+
+      <div class="projects-grid">
+        <article class="project-card">
+          <div class="project-content">
+            <header>
+              <h3>MAL-ROULETTE</h3>
+              <div class="project-links">
+                <a
+                  href="https://github.com/Afard-max/mal-roulette"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Repositorio"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    ><path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    ></path></svg
+                  >
+                </a>
+              </div>
+            </header>
+            <p>
+              {
+                lang === "es"
+                  ? "Aplicación de escritorio open-source diseñada para la selección estocástica de contenido audiovisual mediante la integración y consumo de la API REST de MyAnimeList."
+                  : "Open-source desktop application designed for stochastic audiovisual content selection through the integration and consumption of the MyAnimeList REST API."
+              }
+            </p>
+          </div>
+          <ul class="tech-stack">
+            <li>Python</li>
+            <li>API REST</li>
+            <li>JSON</li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-content">
+            <header>
+              <h3>MAL-METRICS</h3>
+              <div class="project-links">
+                <a
+                  href="https://github.com/Afard-max/malmetrics"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Repositorio"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    ><path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    ></path></svg
+                  ></a
+                >
+              </div>
+            </header>
+            <p>
+              {
+                lang === "es"
+                  ? "Sistema de extracción, procesamiento y visualización de datos estadísticos para perfiles de MyAnimeList, enfocado en el análisis cuantitativo de hábitos de consumo."
+                  : "System for extraction, processing, and visualization of statistical data for MyAnimeList profiles, focused on the quantitative analysis of consumption habits."
+              }
+            </p>
+          </div>
+          <ul class="tech-stack">
+            <li>Data Analysis</li>
+            <li>Python</li>
+            <li>API</li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-content">
+            <header>
+              <h3>EVILOTIFY</h3>
+              <div class="project-links">
+                <a
+                  href="https://github.com/Afard-max/evilotify"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Repositorio"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    ><path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    ></path></svg
+                  >
+                </a>
+              </div>
+            </header>
+            <p>
+              {
+                lang === "es"
+                  ? "Reproductor de audio MP3 que procesa y reproduce flujos de medios en tiempo real a partir de enlaces de YouTube. La extracción de audio y resolución de metadatos opera en el backend utilizando el motor yt-dl."
+                  : "MP3 audio player that processes and streams real-time media directly from YouTube links. Audio extraction and metadata resolution operate in the backend using the yt-dl engine."
+              }
+            </p>
+          </div>
+          <ul class="tech-stack">
+            <li>yt-dl</li>
+            <li>Audio Processing</li>
+            <li>Backend</li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-content">
+            <header>
+              <h3>RENSHUU-DESU</h3>
+              <div class="project-links">
+                <a
+                  href="https://github.com/Afard-max/renshuu-desu"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Repositorio"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    ><path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    ></path></svg
+                  ></a
+                >
+              </div>
+            </header>
+            <p>
+              {
+                lang === "es"
+                  ? "Software interactivo enfocado en la optimización algorítmica para la adquisición, retención espacial y repaso sistemático de vocabulario y gramática del idioma japonés."
+                  : "Interactive software focused on algorithmic optimization for the acquisition, spaced retention, and systematic review of Japanese language vocabulary and grammar."
+              }
+            </p>
+          </div>
+          <ul class="tech-stack">
+            <li>Web Tech</li>
+            <li>SRS Algorithm</li>
+            <li>Linguistics</li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-content">
+            <header>
+              <h3>ALESITO.DEV</h3>
+              <div class="project-links">
+                <a
+                  href="https://github.com/Afard-max/alesito.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Repositorio"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    ><path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    ></path></svg
+                  ></a
+                >
+              </div>
+            </header>
+            <p>
+              {
+                lang === "es"
+                  ? "Portfolio personal desarrollado bajo el paradigma Jamstack. Implementa generación de sitios estáticos (SSG), enrutamiento SPA mediante View Transitions y un sistema de internacionalización (i18n) en tiempo de compilación."
+                  : "Personal portfolio developed under the Jamstack paradigm. Implements static site generation (SSG), SPA routing via View Transitions, and a compile-time internationalization (i18n) system."
+              }
+            </p>
+          </div>
+          <ul class="tech-stack">
+            <li>Astro</li>
+            <li>TypeScript</li>
+            <li>CSS Grid</li>
+          </ul>
+        </article>
+
+        <article class="project-card">
+          <div class="project-content">
+            <header>
+              <h3>JAVA-LEARNING-GUIDE</h3>
+              <div class="project-links">
+                <a
+                  href="https://github.com/Afard-max/java-learning-guide"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Repositorio"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    ><path
+                      d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                    ></path></svg
+                  ></a
+                >
+              </div>
+            </header>
+            <p>
+              {
+                lang === "es"
+                  ? "Landing page interactiva construida para actuar como una hoja de ruta visual en el aprendizaje de desarrollo backend en Java 21. Incluye renderizado de fases y UI responsiva."
+                  : "Interactive landing page built to serve as a visual roadmap for learning Java 21 backend development. Features phase rendering and responsive UI."
+              }
+            </p>
+          </div>
+          <ul class="tech-stack">
+            <li>React 18</li>
+            <li>Vite</li>
+            <li>CSS-in-JS</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="multimedia" class="section-animate">
+      <h2>{t("section.media")}</h2>
+
+      <div class="media-layout">
+        <div class="media-row">
+          <h3 class="media-title">
+            {lang === "es" ? "Conóceme Un Poco Más" : "Get to Know Me"}
+          </h3>
+          <iframe
+            style="border-radius:12px; margin-top: 1rem;"
+            src="https://open.spotify.com/embed/playlist/0iaZF9Tx4yLY0rnkIZnjdf?utm_source=generator&theme=0"
+            width="100%"
+            height="152"
+            frameborder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Spotify Playlist"
+          >
+          </iframe>
+        </div>
+
+        <div class="media-row">
+          <h3 class="media-title">
+            {lang === "es" ? "Canales Recomendados" : "Recommended Channels"}
+          </h3>
+          <div class="youtube-grid">
+            <YoutubeCard
+              channelName="Fazt"
+              channelUrl="https://www.youtube.com/@FaztCode"
+              profileImage="https://unavatar.io/youtube/FaztCode"
+            />
+            <YoutubeCard
+              channelName="Prof. Santiago"
+              channelUrl="https://www.youtube.com/@ProfesorSantiago"
+              profileImage="https://unavatar.io/youtube/ProfesorSantiago"
+            />
+            <YoutubeCard
+              channelName="Soy Dalto"
+              channelUrl="https://www.youtube.com/@soydalto"
+              profileImage="https://unavatar.io/youtube/soydalto"
+            />
+
+            <YoutubeCard
+              channelName="S4vitar"
+              channelUrl="https://www.youtube.com/@s4vitar"
+              profileImage="https://unavatar.io/youtube/s4vitar"
+            />
+            <YoutubeCard
+              channelName="Dot Dager"
+              channelUrl="https://www.youtube.com/@DotDager"
+              profileImage="https://unavatar.io/youtube/DotDager"
+            />
+            <YoutubeCard
+              channelName="Xavier Mitjana"
+              channelUrl="https://www.youtube.com/@XavierMitjana"
+              profileImage="https://unavatar.io/youtube/XavierMitjana"
+            />
+
+            <YoutubeCard
+              channelName="Valentín"
+              channelUrl="https://www.youtube.com/@va360-valen"
+              profileImage="https://unavatar.io/youtube/va360-valen"
+            />
+            <YoutubeCard
+              channelName="Hussein Nasser"
+              channelUrl="https://www.youtube.com/@hnasr/playlists"
+              profileImage="https://unavatar.io/youtube/hnasr"
+            />
+            <YoutubeCard
+              channelName="Bluuweb"
+              channelUrl="https://www.youtube.com/@bluuweb/videos"
+              profileImage="https://unavatar.io/youtube/bluuweb"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="section-animate">
+      <h2>{t("section.contact")}</h2>
+
+      <div class="contact-wrapper">
+        <p class="contact-text">
+          {
+            lang === "es"
+              ? "¿Estás interesado en establecer comunicación para colaboración técnica o cualquier tópico de software? El canal de recepción se encuentra operativo."
+              : "Are you interested in establishing contact for technical collaboration or any software-related topic? The communication channel is open."
+          }
+        </p>
+
+        <a href="mailto:tucorreo@ejemplo.com" class="contact-btn">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="mail-icon"
+          >
+            <path
+              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+            ></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          {lang === "es" ? "INICIAR TRANSMISIÓN" : "INITIATE TRANSMISSION"}
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+    /* CRÍTICO: Expansión masiva del límite inferior para permitir que la última 
+       sección (Contacto) pueda ascender hasta la coordenada Y=128px sin chocar con el fondo */
+    padding-bottom: 70vh;
+  }
+
+  section {
+    min-height: 60vh;
+    /* CRÍTICO: 128px equivale exactamente a los 8rem de padding-top del panel izquierdo.
+       Esto garantiza alineación ortogonal perfecta con el título "ALEXANDER" */
+    scroll-margin-top: 128px;
+  }
+
+  h2 {
+    font-size: 2rem;
+    color: var(--color-gold);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .content-placeholder {
+    border: 1px dashed var(--color-blue);
+    padding: 2rem;
+    color: var(--color-muted);
+    border-radius: 8px;
+    background: rgba(17, 34, 80, 0.5);
+  }
+  /* ── FORMATO DE TEXTO (PROSE) ── */
+  .prose p {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin-bottom: 1.2rem;
+  }
+
+  .prose strong {
+    color: var(--color-cream);
+    font-weight: 700;
+  }
+
+  /* ── GEOMETRÍA DE LÍNEA DE TIEMPO ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    /* Eje vertical de la línea de tiempo */
+    border-left: 1px solid rgba(0, 150, 255, 0.2);
+    padding-left: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .timeline-item {
+    position: relative;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    /* Cálculo geométrico para centrar el nodo sobre el borde izquierdo */
+    left: -2.35rem;
+    top: 0.2rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--color-gold);
+    box-shadow: 0 0 10px rgba(224, 197, 143, 0.4);
+  }
+
+  .timeline-date {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.8rem;
+    color: var(--color-gold);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.3rem;
+    color: var(--color-cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-tech {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.75rem;
+    color: var(--color-blue);
+    margin-bottom: 0.8rem;
+  }
+
+  .timeline-content p {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  /* ── MATRIZ DE PROYECTOS (GRID) ── */
+  .projects-grid {
+    display: grid;
+    /* Función matemática para ajuste automático de columnas según el viewport disponible */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgba(17, 34, 80, 0.4);
+    border: 1px solid rgba(0, 150, 255, 0.15);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition:
+      transform 300ms cubic-bezier(0.23, 1, 0.32, 1),
+      box-shadow 300ms ease,
+      border-color 300ms ease;
+  }
+
+  /* Cinemática de elevación y resplandor áureo al hover */
+  .project-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(224, 197, 143, 0.5); /* Color Gold translúcido */
+    box-shadow:
+      0 10px 30px -10px rgba(0, 0, 0, 0.5),
+      0 0 15px rgba(224, 197, 143, 0.1);
+  }
+
+  .project-content header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .project-content h3 {
+    font-size: 1.15rem;
+    color: var(--color-cream);
+    margin: 0;
+  }
+
+  .project-links a {
+    color: var(--color-muted);
+    transition: color 200ms ease;
+    display: flex;
+  }
+
+  .project-links svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .project-links a:hover {
+    color: var(--color-gold);
+  }
+
+  .project-content p {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tech-stack li {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.7rem;
+    color: var(--color-gold);
+    background-color: #000000;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── SECCIÓN MULTIMEDIA ── */
+  .media-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem; /* Separación amplia entre la fila de Spotify y la de YouTube */
+    margin-top: 1.5rem;
+  }
+
+  .media-row {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .media-title {
+    font-size: 1.3rem;
+    color: var(--color-cream);
+    margin: 0;
+    border-bottom: 1px solid rgba(224, 197, 143, 0.2);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .youtube-grid {
+    display: grid;
+    /* Grid estricto de 3 columnas */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem 1.5rem;
+    justify-items: center; /* Centra las tarjetas en su celda */
+  }
+
+  /* ── SECCIÓN CONTACTO ── */
+  .contact-wrapper {
+    background-color: rgba(17, 34, 80, 0.4);
+    border: 1px solid rgba(0, 150, 255, 0.2);
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact-text {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+    max-width: 600px;
+    margin: 0;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: #000000;
+    border: 2px solid var(--color-gold);
+    color: var(--color-gold);
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .contact-btn:hover {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    box-shadow: 0 0 20px rgba(224, 197, 143, 0.4);
+  }
+
+  .mail-icon {
+    width: 20px;
+    height: 20px;
+  }
+</style>

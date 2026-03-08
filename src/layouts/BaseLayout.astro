@@ -1,0 +1,96 @@
+---
+import "../styles/global.css";
+import "../styles/grid.css";
+import "../styles/animations.css";
+import "../styles/ticker.css";
+import ParticleCanvas from "../components/ParticleCanvas.astro";
+import TopBar from "../components/TopBar.astro";
+import { ViewTransitions } from "astro:transitions";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <ViewTransitions />
+    <meta name="description" content="Portfolio de Alexander Ruiz Diaz" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <TopBar />
+    <ParticleCanvas />
+    <script>
+      document.addEventListener("mousemove", (e) => {
+        document.documentElement.style.setProperty(
+          "--mouse-x",
+          `${e.clientX}px`,
+        );
+        document.documentElement.style.setProperty(
+          "--mouse-y",
+          `${e.clientY}px`,
+        );
+      });
+    </script>
+
+    <div class="app-layout">
+      <aside class="panel-left">
+        <slot name="left-panel" />
+      </aside>
+
+      <main class="panel-right">
+        <slot name="right-panel" />
+      </main>
+    </div>
+    <script>
+      // Envolvemos el observer en el evento nativo de Astro para SPA routing
+      document.addEventListener("astro:page-load", () => {
+        const prefersReducedMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        if (prefersReducedMotion) {
+          // Fallback de seguridad: si no hay animación, forzamos visibilidad
+          document
+            .querySelectorAll(".section-animate")
+            .forEach((el) => el.classList.add("visible"));
+          return;
+        }
+
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.15,
+        };
+
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        }, observerOptions);
+
+        setTimeout(() => {
+          document.querySelectorAll(".section-animate").forEach((section) => {
+            observer.observe(section);
+          });
+        }, 50);
+      });
+    </script>
+  </body>
+</html>

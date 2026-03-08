@@ -1,43 +1,75 @@
-# Astro Starter Kit: Minimal
+# Personal Portfolio - alesito.dev
 
-```sh
-npm create astro@latest -- --template minimal
+This repository contains the source code for my personal portfolio website, live at [alesito.dev](https://alesito.dev). It's a modern, performant, and multilingual site built with [Astro](https://astro.build/).
+
+## ✨ Key Features
+
+- **🚀 Astro-Powered**: Built with the Astro web framework for a fast, content-focused experience with excellent performance (zero JavaScript by default).
+- **🌐 Multilingual Support**: Fully implemented internationalization (i18n) for English and Spanish content, with a language switcher component.
+- **🎨 Component-Based Architecture**: The UI is organized into reusable Astro components found in `src/components`, including a particle canvas background and a tech stack ticker.
+- **💻 Tech Showcase**: Displays my technical skills and social profiles using data from TypeScript files in `src/data`.
+- **🔧 TypeScript Integration**: The entire project uses TypeScript for robust and maintainable code.
+
+## 🛠️ Tech Stack
+
+- **Framework**: [Astro](https://astro.build/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: Standard CSS with modular stylesheets.
+- **Deployment**: (You can add your deployment platform here, e.g., Vercel, Netlify)
+
+## 📂 Project Structure
+
+The project follows a standard Astro project structure:
+
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
-├── public/
+├── public/              # Static assets (favicons, images)
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/      # Reusable Astro components
+│   ├── data/            # Project data (profile, social links, tech stack)
+│   ├── i18n/            # Internationalization (JSON files and utils)
+│   ├── layouts/         # Base page layouts
+│   ├── pages/           # Site pages and routing
+│   └── styles/          # Global and component styles
+├── astro.config.mjs     # Astro configuration
+└── package.json         # Project dependencies and scripts
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🚀 Getting Started
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+To run this project locally, follow these steps:
 
-Any static assets, like images, can be placed in the `public/` directory.
+1.  **Clone the repository:**
 
-## 🧞 Commands
+    ```bash
+    git clone https://github.com/alex-rd/alesito.dev.git
+    ```
 
-All commands are run from the root of the project, from a terminal:
+2.  **Navigate to the project directory:**
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+    ```bash
+    cd alesito.dev
+    ```
 
-## 👀 Want to learn more?
+3.  **Install dependencies:**
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+    ```bash
+    npm install
+    ```
+
+4.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+    This will start a local development server, usually at `http://localhost:4321`.
+
+### Available Scripts
+
+- `npm run dev`: Starts the local development server.
+- `npm run build`: Builds the site for production.
+- `npm run preview`: Serves the production build locally for previewing.
+
+## ✒️ Author
+
+- **Alexander Ruiz Diaz**
+- **Email**: [af.alexander.rd@gmail.com](mailto:af.alexander.rd@gmail.com)

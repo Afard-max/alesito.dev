@@ -1,0 +1,145 @@
+---
+// src/components/Sidebar.astro
+import { profileData } from "../data/profile";
+import NavIndex from "./NavIndex.astro";
+import SocialLinks from "./SocialLinks.astro";
+import TechTicker from "./TechTicker.astro";
+import { useTranslations } from "../i18n/utils";
+
+const lang = (Astro.params.lang as "es" | "en") || "es";
+const t = useTranslations(lang);
+---
+
+<div class="sidebar-container">
+  <div class="top-section-wrapper">
+    <section class="profile-section">
+      <img
+        src="/photo.webp"
+        alt={`Foto de perfil de ${profileData.name}`}
+        class="avatar"
+      />
+      <div class="profile-text-block">
+        <h1 class="name-first">ALEXANDER</h1>
+        <h1 class="name-last">RUIZ DIAZ</h1>
+        <h2 class="title">{t("profile.title")}</h2>
+      </div>
+    </section>
+  </div>
+
+  <section class="nav-section">
+    <div class="nav-group">
+      <NavIndex />
+    </div>
+  </section>
+
+  <section class="bottom-section">
+    <div class="social-wrapper">
+      <SocialLinks />
+    </div>
+    <div class="ticker-wrapper-sidebar">
+      <TechTicker />
+    </div>
+  </section>
+</div>
+
+<style>
+  .sidebar-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  .top-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .profile-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px var(--color-gold);
+    object-fit: cover;
+    object-position: center top;
+    background-color: #000000;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .profile-text-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+    text-align: left;
+  }
+
+  .name-first,
+  .name-last {
+    font-size: 2.8rem;
+    color: #ffffff;
+    font-weight: 800;
+    line-height: 0.85;
+    margin: 0;
+  }
+
+  .name-first {
+    letter-spacing: -1px;
+  }
+
+  .title {
+    font-size: 1.15rem;
+    color: var(--color-gold);
+    font-weight: 600;
+    margin: 0;
+    margin-top: 6px;
+  }
+
+  .nav-section {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .bottom-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    width: 100%;
+    overflow: hidden;
+    min-height: 200px;
+  }
+
+  .social-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .ticker-wrapper-sidebar {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+</style>
