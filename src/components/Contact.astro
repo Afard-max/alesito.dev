@@ -1,0 +1,95 @@
+---
+interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="contacto" class="section-animate">
+  <h2>{lang === "es" ? "Contacto" : "Contact"}</h2>
+
+  <div class="contact-wrapper">
+    <p class="contact-text">
+      {
+        lang === "es"
+          ? "¿Estás interesado en establecer comunicación para colaboración técnica o cualquier tópico de software? El canal de recepción se encuentra operativo."
+          : "Are you interested in establishing contact for technical collaboration or any software-related topic? The communication channel is open."
+      }
+    </p>
+
+    <a href="mailto:tucorreo@ejemplo.com" class="contact-btn">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        class="mail-icon"
+      >
+        <path
+          d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+        ></path>
+        <polyline points="22,6 12,13 2,6"></polyline>
+      </svg>
+      {lang === "es" ? "INICIAR TRANSMISIÓN" : "INITIATE TRANSMISSION"}
+    </a>
+  </div>
+</section>
+
+<style>
+  .contact-wrapper {
+    background-color: rgba(17, 34, 80, 0.4);
+    border: 1px solid rgba(0, 150, 255, 0.2);
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact-text {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+    max-width: 600px;
+    margin: 0;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background-color: #000000;
+    border: 2px solid var(--color-gold);
+    color: var(--color-gold);
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .contact-btn:hover {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    box-shadow: 0 0 20px rgba(224, 197, 143, 0.4);
+  }
+
+  .mail-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 480px) {
+    .contact-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

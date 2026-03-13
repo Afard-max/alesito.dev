@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Sidebar from "../../components/Sidebar.astro";
 import { useTranslations } from "../../i18n/utils";
 import YoutubeCard from "../../components/YoutubeCard.astro";
+import Contact from "../../components/Contact.astro";
 
 export function getStaticPaths() {
   return [{ params: { lang: "es" } }, { params: { lang: "en" } }];
@@ -388,7 +389,6 @@ const t = useTranslations(lang as "es" | "en");
               channelUrl="https://www.youtube.com/@soydalto"
               profileImage="https://unavatar.io/youtube/soydalto"
             />
-
             <YoutubeCard
               channelName="S4vitar"
               channelUrl="https://www.youtube.com/@s4vitar"
@@ -404,7 +404,6 @@ const t = useTranslations(lang as "es" | "en");
               channelUrl="https://www.youtube.com/@XavierMitjana"
               profileImage="https://unavatar.io/youtube/XavierMitjana"
             />
-
             <YoutubeCard
               channelName="Valentín"
               channelUrl="https://www.youtube.com/@va360-valen"
@@ -425,35 +424,7 @@ const t = useTranslations(lang as "es" | "en");
       </div>
     </section>
 
-    <section id="contacto" class="section-animate">
-      <h2>{t("section.contact")}</h2>
-
-      <div class="contact-wrapper">
-        <p class="contact-text">
-          {
-            lang === "es"
-              ? "¿Estás interesado en establecer comunicación para colaboración técnica o cualquier tópico de software? El canal de recepción se encuentra operativo."
-              : "Are you interested in establishing contact for technical collaboration or any software-related topic? The communication channel is open."
-          }
-        </p>
-
-        <a href="mailto:tucorreo@ejemplo.com" class="contact-btn">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            class="mail-icon"
-          >
-            <path
-              d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-            ></path>
-            <polyline points="22,6 12,13 2,6"></polyline>
-          </svg>
-          {lang === "es" ? "INICIAR TRANSMISIÓN" : "INITIATE TRANSMISSION"}
-        </a>
-      </div>
-    </section>
+    <Contact lang={lang as "es" | "en"} />
   </div>
 </BaseLayout>
 
@@ -462,15 +433,12 @@ const t = useTranslations(lang as "es" | "en");
     display: flex;
     flex-direction: column;
     gap: 8rem;
-    /* CRÍTICO: Expansión masiva del límite inferior para permitir que la última 
-       sección (Contacto) pueda ascender hasta la coordenada Y=128px sin chocar con el fondo */
-    padding-bottom: 70vh;
+    /* FIX: Se eliminó padding-bottom: 70vh que causaba el scroll excesivo */
+    padding-bottom: 4rem;
   }
 
   section {
-    min-height: 60vh;
-    /* CRÍTICO: 128px equivale exactamente a los 8rem de padding-top del panel izquierdo.
-       Esto garantiza alineación ortogonal perfecta con el título "ALEXANDER" */
+    /* FIX: Se eliminó min-height: 60vh que inflaba artificialmente cada sección */
     scroll-margin-top: 128px;
   }
 
@@ -488,6 +456,7 @@ const t = useTranslations(lang as "es" | "en");
     border-radius: 8px;
     background: rgba(17, 34, 80, 0.5);
   }
+
   /* ── FORMATO DE TEXTO (PROSE) ── */
   .prose p {
     font-family: "JetBrains Mono", monospace;
@@ -507,7 +476,6 @@ const t = useTranslations(lang as "es" | "en");
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-    /* Eje vertical de la línea de tiempo */
     border-left: 1px solid rgba(0, 150, 255, 0.2);
     padding-left: 2rem;
     margin-top: 1.5rem;
@@ -519,7 +487,6 @@ const t = useTranslations(lang as "es" | "en");
 
   .timeline-dot {
     position: absolute;
-    /* Cálculo geométrico para centrar el nodo sobre el borde izquierdo */
     left: -2.35rem;
     top: 0.2rem;
     width: 12px;
@@ -562,7 +529,6 @@ const t = useTranslations(lang as "es" | "en");
   /* ── MATRIZ DE PROYECTOS (GRID) ── */
   .projects-grid {
     display: grid;
-    /* Función matemática para ajuste automático de columnas según el viewport disponible */
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.5rem;
     margin-top: 1.5rem;
@@ -582,10 +548,9 @@ const t = useTranslations(lang as "es" | "en");
       border-color 300ms ease;
   }
 
-  /* Cinemática de elevación y resplandor áureo al hover */
   .project-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(224, 197, 143, 0.5); /* Color Gold translúcido */
+    border-color: rgba(224, 197, 143, 0.5);
     box-shadow:
       0 10px 30px -10px rgba(0, 0, 0, 0.5),
       0 0 15px rgba(224, 197, 143, 0.1);
@@ -650,7 +615,7 @@ const t = useTranslations(lang as "es" | "en");
   .media-layout {
     display: flex;
     flex-direction: column;
-    gap: 4rem; /* Separación amplia entre la fila de Spotify y la de YouTube */
+    gap: 4rem;
     margin-top: 1.5rem;
   }
 
@@ -671,67 +636,15 @@ const t = useTranslations(lang as "es" | "en");
 
   .youtube-grid {
     display: grid;
-    /* Grid estricto de 3 columnas */
     grid-template-columns: repeat(3, 1fr);
     gap: 2.5rem 1.5rem;
-    justify-items: center; /* Centra las tarjetas en su celda */
-  }
-
-  /* ── SECCIÓN CONTACTO ── */
-  .contact-wrapper {
-    background-color: rgba(17, 34, 80, 0.4);
-    border: 1px solid rgba(0, 150, 255, 0.2);
-    border-radius: 12px;
-    padding: 3rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    margin-top: 1.5rem;
-  }
-
-  .contact-text {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: var(--color-muted);
-    max-width: 600px;
-    margin: 0;
-  }
-
-  .contact-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    background-color: #000000;
-    border: 2px solid var(--color-gold);
-    color: var(--color-gold);
-    font-family: "JetBrains Mono", monospace;
-    font-weight: 700;
-    font-size: 1rem;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-
-  .contact-btn:hover {
-    background-color: var(--color-gold);
-    color: var(--color-navy);
-    box-shadow: 0 0 20px rgba(224, 197, 143, 0.4);
-  }
-
-  .mail-icon {
-    width: 20px;
-    height: 20px;
+    justify-items: center;
   }
 
   /* ==========================================================
      CRÍTICO: DIRECTIVAS DE RESPONSIVIDAD (VIEWPORT BREAKPOINTS)
      ========================================================== */
 
-  /* Breakpoint para Tablets y pantallas medias (< 1024px) */
   @media (max-width: 1024px) {
     .projects-grid {
       grid-template-columns: repeat(2, 1fr);
@@ -742,9 +655,7 @@ const t = useTranslations(lang as "es" | "en");
     }
   }
 
-  /* Breakpoint para Dispositivos Móviles (< 768px) */
   @media (max-width: 768px) {
-    /* Colapso de la cabecera y navegación */
     header {
       flex-direction: column;
       text-align: center;
@@ -756,7 +667,6 @@ const t = useTranslations(lang as "es" | "en");
       justify-content: center;
     }
 
-    /* Colapso de cuadrículas a una sola dimensión (1D) */
     .projects-grid {
       grid-template-columns: 1fr;
     }
@@ -766,7 +676,6 @@ const t = useTranslations(lang as "es" | "en");
       justify-items: center;
     }
 
-    /* Reestructuración de la tipografía y contenedores multimedia */
     .media-header-group {
       flex-direction: column;
       align-items: flex-start;
@@ -781,7 +690,6 @@ const t = useTranslations(lang as "es" | "en");
       font-size: 1.8rem;
     }
 
-    /* Ajuste geométrico de la línea de tiempo (Experiencia) */
     .timeline {
       padding-left: 1rem;
     }
@@ -798,21 +706,5 @@ const t = useTranslations(lang as "es" | "en");
       margin-bottom: 0.5rem;
       padding-right: 0;
     }
-  }
-
-  /* Breakpoint para Dispositivos Móviles Pequeños (< 480px) */
-  @media (max-width: 480px) {
-    .contact-btn {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-  section:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-  }
-
-  .content-container {
-    padding-bottom: 2rem;
   }
 </style>
