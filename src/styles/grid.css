@@ -43,5 +43,4 @@ body::after {
     transparent 80%
   );
   mix-blend-mode: screen; /* Fusión lumínica sin opacar la rejilla  */
-  transition: background 0.1s ease; /* Suavizado micro-estético en caso de salto del puntero */
 }

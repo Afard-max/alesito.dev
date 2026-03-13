@@ -37,15 +37,28 @@ const { title } = Astro.props;
     <TopBar />
     <ParticleCanvas />
     <script>
+      let ticking = false;
+      let mouseX = 0;
+      let mouseY = 0;
+
       document.addEventListener("mousemove", (e) => {
-        document.documentElement.style.setProperty(
-          "--mouse-x",
-          `${e.clientX}px`,
-        );
-        document.documentElement.style.setProperty(
-          "--mouse-y",
-          `${e.clientY}px`,
-        );
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            document.documentElement.style.setProperty(
+              "--mouse-x",
+              `${mouseX}px`,
+            );
+            document.documentElement.style.setProperty(
+              "--mouse-y",
+              `${mouseY}px`,
+            );
+            ticking = false;
+          });
+          ticking = true;
+        }
       });
     </script>
 

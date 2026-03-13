@@ -726,4 +726,93 @@ const t = useTranslations(lang as "es" | "en");
     width: 20px;
     height: 20px;
   }
+
+  /* ==========================================================
+     CRÍTICO: DIRECTIVAS DE RESPONSIVIDAD (VIEWPORT BREAKPOINTS)
+     ========================================================== */
+
+  /* Breakpoint para Tablets y pantallas medias (< 1024px) */
+  @media (max-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .youtube-grid {
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: center;
+    }
+  }
+
+  /* Breakpoint para Dispositivos Móviles (< 768px) */
+  @media (max-width: 768px) {
+    /* Colapso de la cabecera y navegación */
+    header {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+    }
+
+    .nav-links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Colapso de cuadrículas a una sola dimensión (1D) */
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .youtube-grid {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+
+    /* Reestructuración de la tipografía y contenedores multimedia */
+    .media-header-group {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    /* Ajuste geométrico de la línea de tiempo (Experiencia) */
+    .timeline {
+      padding-left: 1rem;
+    }
+
+    .timeline-item {
+      padding-left: 1.5rem;
+    }
+
+    .timeline-date {
+      position: relative;
+      left: 0;
+      width: auto;
+      text-align: left;
+      margin-bottom: 0.5rem;
+      padding-right: 0;
+    }
+  }
+
+  /* Breakpoint para Dispositivos Móviles Pequeños (< 480px) */
+  @media (max-width: 480px) {
+    .contact-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .content-container {
+    padding-bottom: 2rem;
+  }
 </style>

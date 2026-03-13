@@ -142,5 +142,132 @@ const t = useTranslations(lang);
     display: flex;
     justify-content: center;
   }
-</style>
 
+  /* ==========================================================
+     CRÍTICO: MUTACIÓN RESPONSIVA DEL PANEL LATERAL (<= 1024px)
+     ========================================================== */
+  @media (max-width: 1024px) {
+    /* 1. Cambio de eje: Foto arriba, texto abajo */
+    .profile-section {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      gap: 1.2rem;
+    }
+
+    /* 2. Alineación central del bloque de texto */
+    .profile-text-block {
+      align-items: center;
+      text-align: center;
+    }
+
+    /* 3. Escalado matemático de las tipografías para evitar desbordamiento */
+    .name-first,
+    .name-last {
+      font-size: 2.2rem;
+      line-height: 1;
+      white-space: normal;
+      word-break: break-word;
+    }
+
+    .title {
+      font-size: 1rem;
+      margin-top: 8px;
+    }
+
+    /* 4. Centrado del menú de navegación */
+    .nav-section {
+      align-items: center;
+      margin: 2rem 0;
+    }
+
+    .nav-group {
+      align-items: center;
+    }
+
+    /* 5. Reestructuración de la sección inferior y protección contra desbordamiento de íconos */
+    .bottom-section {
+      min-height: auto; /* Anula la altura mínima rígida de 200px */
+      gap: 2rem;
+    }
+
+    /* Inyección global para forzar la envoltura de los enlaces sociales internos */
+    .social-wrapper :global(ul),
+    .social-wrapper :global(.social-links),
+    .social-wrapper :global(div) {
+      flex-wrap: wrap !important;
+      justify-content: center !important;
+      gap: 1rem;
+    }
+
+    /* Fix topbar overlap en mobile */
+    .sidebar-container {
+      padding-top: 3rem;
+    }
+
+    /* Reducción proporcional del avatar */
+    .avatar {
+      width: 90px;
+      height: 90px;
+    }
+  }
+
+  /* ==========================================================
+     CRÍTICO: RESTRICCIÓN PARAMÉTRICA PARA MÓVILES (<= 768px)
+     ========================================================== */
+  @media (max-width: 768px) {
+    /* 1. Reducción del escalar tipográfico principal */
+    .name-first,
+    .name-last {
+      font-size: 1.6rem !important; /* Disminución geométrica del ~27% */
+    }
+
+    .title {
+      font-size: 0.9rem !important;
+    }
+
+    /* 2. Penetración de encapsulamiento para forzar el centrado del NavIndex */
+    .nav-group {
+      width: 100% !important;
+    }
+
+    .nav-group :global(ul),
+    .nav-group :global(nav),
+    .nav-group :global(li),
+    .nav-group :global(a) {
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+      width: 100% !important;
+    }
+
+    /* Si NavIndex utiliza un borde o línea lateral, esto la reubica/elimina visualmente */
+    .nav-group :global(a::before) {
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .avatar {
+      width: 75px !important;
+      height: 75px !important;
+    }
+
+    .name-first,
+    .name-last {
+      font-size: 1.3rem !important;
+      letter-spacing: 0px;
+    }
+
+    .title {
+      font-size: 0.8rem !important;
+    }
+
+    /* Garantiza layout columna en pantallas muy pequeñas */
+    .profile-section {
+      flex-direction: column !important;
+      gap: 0.8rem;
+    }
+  }
+</style>
