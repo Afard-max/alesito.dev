@@ -5,10 +5,6 @@
   --color-gold: #E0C58F;
   --color-cream: #F5F0E9;
   --color-muted: #D9CBC2;
-
-  /* Coordenadas iniciales para el efecto de luz reactivo al cursor */
-  --mouse-x: 50vw;
-  --mouse-y: 50vh;
 }
 
 html {
