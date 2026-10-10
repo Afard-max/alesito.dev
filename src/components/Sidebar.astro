@@ -143,6 +143,20 @@ const t = useTranslations(lang);
     justify-content: center;
   }
 
+  @media (min-width: 1025px) {
+    .profile-text-block {
+      flex: 1 1 0;
+      min-width: 0;
+      container-type: inline-size;
+    }
+
+    .name-first,
+    .name-last {
+      font-size: clamp(1.1rem, 9cqi, 2.8rem);
+      white-space: nowrap;
+    }
+  }
+
   /* ==========================================================
      CRÍTICO: MUTACIÓN RESPONSIVA DEL PANEL LATERAL (<= 1024px)
      ========================================================== */
